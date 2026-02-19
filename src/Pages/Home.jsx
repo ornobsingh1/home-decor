@@ -1,7 +1,13 @@
+import { useLoaderData } from "react-router";
+
 const Home = () => {
+  const products = useLoaderData()
+  console.log(products)
   return (
-    <div>
-      <h1>Home page</h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* {
+        products.map(product => )
+      } */}
     </div>
   );
 };

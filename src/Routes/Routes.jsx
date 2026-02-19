@@ -3,20 +3,27 @@ import Home from "../Pages/Home";
 import Products from "../Pages/Products";
 import MainLayouts from "../Layouts/MainLayouts";
 import ErrorPage from "../Pages/ErrorPage";
+import WishList from "../Pages/WishList";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayouts />,
     errorElement: <ErrorPage />,
+    hydrateFallbackElement: <p>Loading...</p>,
     children: [
       {
         index: true,
-        element: <Home />,
+        Component: Home,
+        loader: ()=> fetch("furnitureData.json")
       },
       {
         path: "/products",
-        element: <Products />,
+        Component: Products,
+      },
+      {
+        path: "/wishlist",
+        Component: WishList,
       },
     ],
   },
