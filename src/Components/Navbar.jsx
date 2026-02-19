@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 w-11/12 mx-auto pt-4">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,7 +31,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="flex items-center gap-0.5">
-          <img className="w-12" src={'favIcon.png'} alt="" srcset="" />
+          <img className="w-12" src={'favIcon.png'} alt="" />
           <h1 className="text-2xl font-bold">HomeDecor</h1>
         </Link>
       </div>
