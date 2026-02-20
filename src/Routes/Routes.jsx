@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: ()=> fetch("./furnitureData.json")
+        loader: ()=> fetch("/furnitureData.json")
       },
       {
         path: "/products",

@@ -4,12 +4,12 @@ const ProductCard = ({ product }) => {
     <div className="card bg-base-200 shadow-lg border border-gray-500 hover:scale-105 transition ease-in-out duration-100">
       <figure className="h-56 overflow-hidden">
         <img
-          className="p-4 w-full h-full object-cover rounded-2xl"
+          className="w-full h-full object-cover"
           src={image}
           alt=""
         />
       </figure>
-      <div className="pl-4 pr-4 pb-4 ">
+      <div className="p-2">
         <h2 className="card-title">{name}</h2>
         <p className="text-sm text-gray-800">Price: ${price}</p>
         <p className="text-sm text-gray-800">Category: {category}</p>
