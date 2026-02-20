@@ -1,18 +1,23 @@
 import { useParams } from "react-router";
 import useProducts from "../Hooks/useProducts";
+import { addToStoredDB } from "../utility/addToDB";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { products, loading } = useProducts();
-
   if (loading) return <p>loading...</p>;
-  const product = products.find((p) => p.id === Number(id));
 
+  const product = products.find((p) => p.id === Number(id));
   if (!product) {
     return <p className="text-center">Product not found</p>;
   }
 
   const { name, image, category, price, description } = product;
+
+  const handleAddToWishList = (id) => {
+    addToStoredDB(id);
+  };
+
   return (
     <div className="card bg-base-100 shadow-xl border border-base-300 hover:shadow-2xl transition-all duration-300 group my-4">
       {/* Image */}
@@ -37,7 +42,10 @@ const ProductDetails = () => {
         {/* Price + Action */}
         <div className="flex items-center justify-between mt-4">
           <p className="text-xl font-bold">${price}</p>
-          <button className="btn btn-sm btn-outline gap-2">
+          <button
+            onClick={() => handleAddToWishList(id)}
+            className="btn btn-sm btn-outline gap-2"
+          >
             <span className="text-base">♡</span>
             Wishlist
           </button>
