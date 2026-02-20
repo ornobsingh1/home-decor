@@ -28,7 +28,6 @@ const Products = () => {
             className="input join-item"
             placeholder="Search Products"
           />
-          {/* <button className="btn join-item rounded-r-full btn-primary">Search</button> */}
         </div>
       </div>
 

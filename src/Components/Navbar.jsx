@@ -31,7 +31,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="flex items-center gap-0.5">
-          <img className="w-12" src={'favIcon.png'} alt="" />
+          <img className="w-12" src={'/favIcon.png'} alt="" />
           <h1 className="text-2xl font-bold">HomeDecor</h1>
         </Link>
       </div>
@@ -55,7 +55,7 @@ const Navbar = () => {
           </li>
         </ul>
 
-        <NavLink to="/products" className="btn">
+        <NavLink to="/products" className="btn btn-outline">
           Visit Shop
         </NavLink>
       </div>
