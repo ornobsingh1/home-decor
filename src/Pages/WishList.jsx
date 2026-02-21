@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import useProducts from "../Hooks/useProducts";
 import { getStoredProduct } from "../utility/addToDB";
-import { X } from "lucide-react";
 
 const WishList = () => {
   const [wishlist, setWishlist] = useState([]);
+  const [sortOrder, setSortOrder] = useState("none");
+
   const { products } = useProducts();
-
-  console.log(products);
-
   useEffect(() => {
     // jodi local storage a full object thake evabe easyly data access korte parbo...
     // const savedList = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -22,37 +20,60 @@ const WishList = () => {
     );
     setWishlist(myWishList);
   }, [products]);
+
+  const sortedItem = (() => {
+    if (sortOrder === "price-asc") {
+      return [...wishlist].sort((a, b) => a.price - b.price);
+    } else if (sortOrder === "price-desc") {
+      return [...wishlist].sort((a, b) => b.price - a.price);
+    } else {
+      return wishlist;
+    }
+  })();
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-4">
-        {wishlist.map((product) => (
-          <div
-            key={product.id}
-            className="border rounded-lg shadow hover:shadow-lg transition duration-200 overflow-hidden"
+    <div>
+      <div className="flex justify-between items-center mb-4 mt-2">
+        <h1 className="text-2xl font-semibold">
+          WishList{" "}
+          <span className="text-sm text-gray-600">({wishlist.length})</span>
+        </h1>
+
+        {/* sort */}
+        <label className="form-control">
+          <select
+            className="select select-bordered"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
           >
-            <div className="relative h-48">
+            <option value="none">Sort By Price</option>
+            <option value="price-asc">Low-&gt;High</option>
+            <option value="price-desc">High-&gt;Low</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="space-y-3 mt-4">
+        {sortedItem.map((p) => (
+          <div key={p.id} className="card card-side bg-base-100 shadow border">
+            <figure>
               <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover"
+                className="w-40 h-28 object-cover"
+                src={p.image}
+                alt={p.name}
               />
-              <button className="absolute top-2 right-2 text-white rounded bg-gray-700 cursor-pointer">
-                <X />
-              </button>
+            </figure>
+            <div className="card-body">
+              <h3 className="card-title">{p.name}</h3>
+              <p className="text-base-content/70">{p.category}</p>
             </div>
-            <div className="p-3">
-              <h2 className="font-semibold text-lg">{product.name}</h2>
-              <p className="text-sm text-gray-600">
-                Category: {product.category}
-              </p>
-              <p className="text-sm text-gray-800 font-medium mt-1">
-                Price: ${product.price}
-              </p>
+            <div className="pr-4 flex items-center gap-3">
+              <div className="font-semibold">${p.price}</div>
+              <button className="btn btn-outline">Remove</button>
             </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
